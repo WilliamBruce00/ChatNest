@@ -1,0 +1,5 @@
+<div class="w-full flex flex-col">
+  @for (item of contacts; track $index) {
+  <app-contact-item [data]="item"></app-contact-item>
+  }
+</div>

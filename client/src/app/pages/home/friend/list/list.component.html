@@ -1,0 +1,56 @@
+<div class="flex flex-col mt-2">
+  @for (item of friends; track $index) {
+  <div class="flex gap-3 justify-between">
+    <div class="flex items-center gap-2">
+      <img [src]="item.friendID.avatar" class="w-14 h-14 rounded-full p-0.5" />
+      <p
+        class="font-medium cursor-pointer hover:underline"
+        (click)="handleOpenProfile(item.friendID)"
+      >
+        {{ item.friendID.fullname }}
+      </p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button (click)="handleOpenChat(item.friendID)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-message-square-text"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          />
+          <path d="M13 8H7" />
+          <path d="M17 12H7" />
+        </svg>
+      </button>
+      <button (click)="handleCancelFriend(item.friendID._id)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-user-round-x"
+        >
+          <path d="M2 21a8 8 0 0 1 11.873-7" />
+          <circle cx="10" cy="8" r="5" />
+          <path d="m17 17 5 5" />
+          <path d="m22 17-5 5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  }
+</div>

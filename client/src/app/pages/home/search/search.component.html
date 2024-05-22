@@ -1,0 +1,11 @@
+<div class="w-full flex flex-col">
+  @for (item of result; track $index) {
+  <div
+    class="flex gap-3 items-center w-full p-3 hover:bg-slate-200 cursor-pointer"
+    (click)="openChat(item)"
+  >
+    <img [src]="item.avatar" class="w-14 h-14 rounded-full p-0.5" />
+    <p class="font-medium">{{ item.fullname }}</p>
+  </div>
+  }
+</div>

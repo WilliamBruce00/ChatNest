@@ -1,0 +1,58 @@
+<div
+  class="flex gap-3 cursor-pointer hover:bg-gray-200 p-2"
+  (click)="HandleOpenChat()"
+  #contactRef
+>
+  <div class="relative inline-block w-[70px]">
+    <img [src]="data.avatar" class="w-14 h-14 rounded-full p-0.5" />
+    @if (online.includes(data._id)) {
+    <span
+      class="h-3 w-3 rounded-full border border-white bg-green-500 block absolute top-1 right-0"
+    ></span>
+    }
+  </div>
+  <div class="w-full flex items-center flex-col">
+    <div class="flex w-full justify-between">
+      <p class="font-medium">{{ data.fullname }}</p>
+      <small class="text-gray-600">{{
+        data.message.createAt | timediff
+      }}</small>
+    </div>
+    <div class="flex w-full justify-between">
+      @if (data.message.type === "message") {
+      <!-- type message -->
+      @if (data.message.sender !== data._id) {
+      <p class="truncate w-[250px]">Bạn: {{ data.message.message }}</p>
+      } @else {
+      <p class="truncate w-[250px]">{{ data.message.message }}</p>
+      }
+      <!-- End -->
+      } @else if(data.message.type === "accepted add friend") {
+      <!-- Type -->
+      @if(data.message.message !== data._id){
+      <p class="truncate w-[250px]">{{ data.fullname }} đã đồng ý kết bạn</p>
+      } @else {
+      <p class="truncate w-[250px]">Bạn vừa kết bạn với {{ data.fullname }}</p>
+      }
+      <!-- End -->
+      } @else if (data.message.type === "image") { @if (data.message.sender !==
+      data._id) {
+      <p class="truncate w-[250px]">Bạn: [Hình ảnh]</p>
+      } @else {
+      <p class="truncate w-[250px]">[Hình ảnh]</p>
+      } } @else if (data.message.type === "file") { @if (data.message.sender !==
+      data._id) {
+      <p class="truncate w-[250px]">Bạn: [Tập tin]</p>
+      } @else {
+      <p class="truncate w-[250px]">[Tập tin]</p>
+      } }
+
+      <!-- Message seen -->
+      @if (data.seen) {
+      <small
+        class="bg-red-600 font-medium w-5 h-5 rounded-full text-white flex justify-center items-center"
+        >{{ data.seen }}</small
+      >}
+    </div>
+  </div>
+</div>

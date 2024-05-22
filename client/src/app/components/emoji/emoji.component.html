@@ -1,0 +1,14 @@
+<div class="absolute bottom-10 left-0 bg-white w-[300px] h-[300px]">
+  @if (!emoji.length) {
+  <div class="w-full h-full flex justify-center items-center">
+    <app-loading></app-loading>
+  </div>
+  }
+  <div class="w-full h-full grid grid-cols-5 gap-5 overflow-auto p-3">
+    @for (item of emoji; track $index) {
+    <p class="text-2xl cursor-pointer" (click)="sendEmoji(item.character)">
+      {{ item.character }}
+    </p>
+    }
+  </div>
+</div>

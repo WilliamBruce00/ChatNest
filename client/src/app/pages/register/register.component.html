@@ -1,0 +1,217 @@
+<div class="font-[sans-serif] text-[#333]">
+  <div class="min-h-screen flex fle-col items-center justify-center py-6 px-4">
+    <div class="grid md:grid-cols-2 items-center gap-4 max-w-7xl w-full">
+      <div
+        class="border border-gray-300 rounded-md p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto slide-in"
+      >
+        <form
+          class="space-y-6"
+          method="post"
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="mb-10">
+            <h3 class="text-3xl font-extrabold">Đăng ký</h3>
+          </div>
+          <div>
+            <label class="text-sm mb-2 block">Họ và tên</label>
+            <div class="relative flex items-center">
+              <input
+                type="text"
+                formControlName="fullname"
+                [class.border-red-600]="form.controls.fullname.errors?.['required'] &&
+                form.controls.fullname.dirty"
+                class="w-full text-sm border-b-2 border-gray-300 px-4 py-3 outline-[#333] focus:outline-none"
+                placeholder="Nhập Họ và tên"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-[18px] h-[18px] absolute right-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                />
+              </svg>
+            </div>
+
+            @if (form.controls.fullname.errors?.['required'] &&
+            form.controls.fullname.dirty ){
+            <small class="text-red-600">Đây là thông tin bắt buộc</small>
+            }
+          </div>
+          <div>
+            <label class="text-sm mb-2 block">Email</label>
+            <div class="relative flex items-center">
+              <input
+                type="text"
+                class="w-full text-sm border-b-2 border-gray-300 px-4 py-3 outline-[#333] focus:outline-none"
+                placeholder="Nhập địa chỉ email"
+                formControlName="email"
+                [class.border-red-600]="form.controls.email.dirty && (form.controls.email.errors?.['requierd'] || form.controls.email.errors?.['pattern'])"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-[18px] h-[18px] absolute right-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                />
+              </svg>
+            </div>
+
+            @if (form.controls.email.dirty) {
+            @if(form.controls.email.errors?.['required']) {
+            <small class="text-red-600">Đây là thông tin bắt buộc</small>
+            } @else if (form.controls.email.errors?.['pattern']) {
+            <small class="text-red-600">Email không đúng định dạng</small>
+            } }
+          </div>
+          <div>
+            <label class="text-sm mb-2 block">Mật khẩu</label>
+            <div class="relative flex items-center">
+              <input
+                [type]="isShowPassword ? 'text' : 'password'"
+                class="w-full text-sm border-b-2 border-gray-300 px-4 py-3 outline-[#333] focus:outline-none"
+                placeholder="Mật khẩu"
+                formControlName="password"
+                [class.border-red-600]="form.controls.password.dirty && (form.controls.password.errors?.['required'] || form.controls.password.errors?.['minlength'])"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-[18px] h-[18px] absolute right-4 cursor-pointer"
+                (click)="showPassword()"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+            </div>
+
+            @if (form.controls.password.dirty) { @if
+            (form.controls.password.errors?.['required']) {
+            <small class="text-red-600">Đây là thông tin bắt buộc</small>
+            } @else if (form.controls.password.errors?.['minlength']) {
+            <small class="text-red-600">Mật khẩu ít nhất 6 ký tự</small>
+            } }
+          </div>
+
+          <div>
+            <label class="text-sm mb-2 block">Ngày sinh</label>
+            <div class="relative flex items-center">
+              <input
+                type="text"
+                class="w-full text-sm border-b-2 border-gray-300 px-4 py-3 outline-[#333] focus:outline-none"
+                placeholder="VD: 01/01/2000"
+                formControlName="birthday"
+                [class.border-red-600]="form.controls.birthday.dirty && (form.controls.birthday.errors?.['required'] || form.controls.birthday.errors?.['pattern'])"
+              />
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-[18px] h-[18px] absolute right-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"
+                />
+              </svg>
+            </div>
+
+            @if (form.controls.birthday.dirty) { @if
+            (form.controls.birthday.errors?.['required']) {
+            <small class="text-red-600">Đây là thông tin bắt buộc</small>
+            } @else if (form.controls.birthday.errors?.['pattern']) {
+            <small class="text-red-600">Ngày sinh không đúng định dạng</small>
+            } }
+          </div>
+
+          <div>
+            <label class="text-sm mb-2 block">Giới tính</label>
+
+            <div class="relative flex items-center">
+              <select
+                formControlName="gender"
+                class="w-full text-sm border-b-2 border-gray-300 px-4 py-3 outline-[#333] focus:outline-none"
+                [class.border-red-600]="form.controls.gender.dirty &&
+                form.controls.gender.errors?.['required']"
+              >
+                <option value="">Chọn giới tính</option>
+                <option value="0">Nam</option>
+                <option value="1">Nữ</option>
+              </select>
+            </div>
+
+            @if (form.controls.gender.dirty &&
+            form.controls.gender.errors?.['required']) {
+            <small class="text-red-600">Đây là thông tin bắt buộc</small>
+            }
+          </div>
+
+          <div class="flex items-center justify-center gap-2">
+            <div class="text-sm">
+              <a
+                href="jajvascript:void(0);"
+                class="text-blue-600 hover:underline"
+              >
+                Forgot your password?
+              </a>
+            </div>
+          </div>
+          <div class="!mt-10">
+            <button
+              type="submit"
+              [disabled]="!form.valid"
+              [class.opacity-65]="!form.valid"
+              class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold text-white bg-blue-600 rounded-lg focus:outline-none"
+            >
+              Đăng ký
+            </button>
+          </div>
+          <p class="text-sm !mt-10 text-center">
+            Bạn đã có tài khoản?
+            <a
+              routerLink="/login"
+              class="text-blue-600 hover:underline ml-1 whitespace-nowrap"
+              >Đăng nhập</a
+            >
+          </p>
+        </form>
+      </div>
+      <div class="lg:h-[400px] md:h-[300px] max-md:mt-10">
+        <img
+          src="https://readymadeui.com/login-image.webp"
+          class="w-full h-full object-cover"
+          alt="Dining Experience"
+        />
+      </div>
+    </div>
+  </div>
+</div>

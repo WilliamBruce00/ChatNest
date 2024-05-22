@@ -1,0 +1,32 @@
+<div class="flex flex-col mt-2">
+  @for (item of requests; track $index) {
+  <div class="flex gap-3">
+    <div class="flex gap-3 items-center w-3/4 p-2">
+      <img [src]="item.avatar" class="w-14 h-14 rounded-full p-0.5" />
+      <p
+        class="font-medium cursor-pointer hover:underline"
+        (click)="handleOpenProfile(item)"
+      >
+        {{ item.fullname }}
+      </p>
+    </div>
+    <div class="flex flex-col w-[180px] justify-center gap-2">
+      <small class="text-right">{{ item.request.createAt | timediff }}</small>
+      <div class="flex gap-2 justify-end">
+        <button
+          class="bg-blue-600 text-white px-2 rounded-lg"
+          (click)="handleConfirmAddFriend(item.request)"
+        >
+          Xác nhận
+        </button>
+        <button
+          class="bg-gray-600 text-white px-2 rounded-lg"
+          (click)="handleCancelAddFriend(item.request)"
+        >
+          Hủy
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</div>

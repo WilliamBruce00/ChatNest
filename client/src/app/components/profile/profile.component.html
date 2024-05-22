@@ -1,0 +1,67 @@
+<div
+  class="absolute top-0 left-0 w-screen h-screen black-rgba flex justify-center items-center"
+>
+  <div class="w-[400px] bg-white p-4 rounded-lg">
+    <div class="flex justify-end">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 cursor-pointer"
+        (click)="handleCloseProfile()"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"
+        />
+      </svg>
+    </div>
+
+    <div class="w-full flex justify-center flex-col items-center gap-3">
+      <img [src]="user.avatar" class="w-20 h-20 rounded-full p-0.5" />
+      <p class="font-medium">{{ user.fullname }}</p>
+    </div>
+
+    <div class="w-full flex justify-center my-5">
+      <ul class="flex gap-10">
+        <li
+          [class.bg-blue-600]="page === 'information'"
+          [class.text-white]="page === 'information'"
+          (click)="handleUpdatePage('information')"
+          class="font-medium px-3 rounded-lg cursor-pointer"
+        >
+          Hồ sơ
+        </li>
+        <li
+          [class.bg-blue-600]="page === 'post'"
+          [class.text-white]="page === 'post'"
+          (click)="handleUpdatePage('post')"
+          class="font-medium px-3 rounded-lg cursor-pointer"
+        >
+          Bài viết
+        </li>
+        <li
+          [class.bg-blue-600]="page === 'friend'"
+          [class.text-white]="page === 'friend'"
+          (click)="handleUpdatePage('friend')"
+          class="font-medium px-3 rounded-lg cursor-pointer"
+        >
+          Bạn bè
+        </li>
+      </ul>
+    </div>
+
+    <div class="w-full">
+      @switch (page) { @case ("information") {
+      <app-profile-info [user]="user"></app-profile-info>
+      } @case ("post") {
+      <app-profile-post></app-profile-post>
+      } @case ("friend") {
+      <app-profile-friend></app-profile-friend>
+      } }
+    </div>
+  </div>
+</div>

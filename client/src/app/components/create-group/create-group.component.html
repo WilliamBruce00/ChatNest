@@ -1,0 +1,47 @@
+<div
+  class="absolute top-0 left-0 w-screen h-screen flex justify-center items-center black-rgba"
+>
+  <form
+    action=""
+    method="post"
+    class="w-2/5 bg-white p-3"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="form"
+  >
+    <div class="w-full flex justify-between">
+      <p></p>
+      <p class="cursor-pointer" (click)="closeForm()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"
+          />
+        </svg>
+      </p>
+    </div>
+    <div class="w-full flex gap-2 mt-2">
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Đặt tên nhóm"
+        class="w-4/5 border border-gray-300 pl-3 p-2 focus:outline-none rounded-lg"
+      />
+      <button
+        [disabled]="!form.valid"
+        [class.opacity-65]="!form.valid"
+        type="submit"
+        class="w-1/5 bg-blue-600 text-white rounded-lg"
+      >
+        Tạo
+      </button>
+    </div>
+  </form>
+</div>

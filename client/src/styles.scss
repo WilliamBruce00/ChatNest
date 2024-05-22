@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.slide-in {
+  animation: slideIn 0.3s linear;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-30%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
